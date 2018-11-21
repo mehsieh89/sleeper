@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FixedSizeList as List } from 'react-window';
 import { data } from './data.js';
+import Header from './components/header.js';
 import './App.css';
 
 class App extends Component {
@@ -12,10 +13,10 @@ class App extends Component {
   }
 
   row = ({ index, style }) => {
-    console.log(index);
-    console.log(this.state.data.season_stats[index].player.first_name);
-    console.log(this.state.data.season_stats[index].player.last_name);
-    console.log(this.state.data.season_stats[index].player.position);
+    // console.log(index);
+    // console.log(this.state.data.season_stats[index].player.first_name);
+    // console.log(this.state.data.season_stats[index].player.last_name);
+    // console.log(this.state.data.season_stats[index].player.position);
     let player = this.state.data.season_stats[index].player;
 
     return (
@@ -28,10 +29,11 @@ class App extends Component {
   example = () => {
     return (
       <List
-        height={150}
+        className="list"
+        height={600}
         itemCount={1000}
         itemSize={35}
-        width={300}
+        width={800}
       >
         {this.row}
       </List>
@@ -41,16 +43,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.example()}
+        <Header/>
+        <div className="container">
+          {this.example()}
+        </div>
       </div>
     );
   }
 }
 
 export default App;
-
-
-// {/* <Row
-//   playerData={item.player}
-//   key={index}
-// /> */}
