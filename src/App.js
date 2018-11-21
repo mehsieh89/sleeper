@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { data } from './data.js';
+import Row from './components/row.js';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: data.data,
+      hasMore: true,
+      currentIndex: 20,
+      currentRender: [],
+    }
+  }
+
+  componentDidMount() {
+    console.log(this.state.data.season_stats);
+    let newRender = this.state.data.season_stats.slice(0, this.state.currentIndex);
+    this.setState({
+      currentRender: newRender
+    })
+  }
+
+  //
+
+  loadMore = () => {
+
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="container">
+        {
+          this.state.currentRender.map((item, index) => {
+            return (
+              <Row
+                playerData={item.player}
+                key={index}
+              />
+            )
+          })
+        }
       </div>
     );
   }
