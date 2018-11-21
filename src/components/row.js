@@ -8,6 +8,7 @@ class Row extends Component {
   }
 
   render() {
+    console.log(this.props.key);
     return (
       <div>
         <p>{this.props.playerData.first_name} {this.props.playerData.last_name}</p>

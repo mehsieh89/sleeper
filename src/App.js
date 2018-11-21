@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { FixedSizeList as List } from 'react-window';
 import { data } from './data.js';
-import Row from './components/row.js';
 import './App.css';
 
 class App extends Component {
@@ -8,42 +8,49 @@ class App extends Component {
     super(props);
     this.state = {
       data: data.data,
-      hasMore: true,
-      currentIndex: 20,
-      currentRender: [],
     }
   }
 
-  componentDidMount() {
-    console.log(this.state.data.season_stats);
-    let newRender = this.state.data.season_stats.slice(0, this.state.currentIndex);
-    this.setState({
-      currentRender: newRender
-    })
-  }
+  row = ({ index, style }) => {
+    console.log(index);
+    console.log(this.state.data.season_stats[index].player.first_name);
+    console.log(this.state.data.season_stats[index].player.last_name);
+    console.log(this.state.data.season_stats[index].player.position);
+    let player = this.state.data.season_stats[index].player;
 
-  //
+    return (
+      <div className={index % 2 ? 'ListItemOdd' : 'ListItemEven'} style={style}>
+        <p>{player.first_name} {player.last_name} {player.position}</p>
+      </div>
+    )
+  };
 
-  loadMore = () => {
-
-  }
+  example = () => {
+    return (
+      <List
+        height={150}
+        itemCount={1000}
+        itemSize={35}
+        width={300}
+      >
+        {this.row}
+      </List>
+    )
+  };
 
   render() {
     return (
-      <div className="container">
-        {
-          this.state.currentRender.map((item, index) => {
-            return (
-              <Row
-                playerData={item.player}
-                key={index}
-              />
-            )
-          })
-        }
+      <div>
+        {this.example()}
       </div>
     );
   }
 }
 
 export default App;
+
+
+// {/* <Row
+//   playerData={item.player}
+//   key={index}
+// /> */}
