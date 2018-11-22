@@ -18,10 +18,7 @@ class ButtonContainer extends Component {
     }
 
     return (
-      <b className="sortBox"
-        onMouseEnter={this.handleMouseHoverE}
-        onMouseLeave={this.handleMouseHoverL}
-      >
+      <b className="sortBox">
         <div className="sortBtn" onClick={this.handleOnClick}> {this.props.sortStyle} </div>
         {bar}
       </b>

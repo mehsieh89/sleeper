@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { FixedSizeList as List } from 'react-window';
 import { data } from './data.js';
 import Header from './components/header.js';
+import ScrollContainer from './components/scrollContainer.js';
 import './App.css';
 
 class App extends Component {
@@ -30,34 +30,10 @@ class App extends Component {
         newSortedArray.sort((a, b) => (a.player.last_name < b.player.last_name) - (a.player.last_name > b.player.last_name));
         this.setState({rendered: newSortedArray});
       } else if(this.state.sortState === "All") {
-        this.setState({rendered: newSortedArray})
+        this.setState({rendered: newSortedArray});
       }
     }
   }
-
-  row = ({ index, style }) => {
-    let player = this.state.rendered[index].player;
-
-    return (
-      <div className={index % 2 ? 'ListItemOdd' : 'ListItemEven'} style={style}>
-        <p>{player.first_name} {player.last_name} {player.position}</p>
-      </div>
-    )
-  };
-
-  example = () => {
-    return (
-      <List
-        className="list"
-        height={600}
-        itemCount={this.state.data.length}
-        itemSize={35}
-        width={800}
-      >
-        {this.row}
-      </List>
-    )
-  };
 
   render() {
     return (
@@ -66,9 +42,9 @@ class App extends Component {
           sortState={this.state.sortState}
           changeSort={this.changeSort}
         />
-        <div className="container">
-          {this.example()}
-        </div>
+        <ScrollContainer
+          rendered={this.state.rendered}
+        />
       </div>
     );
   }
