@@ -10,7 +10,7 @@ class ScrollContainer extends Component {
     let player = this.props.rendered[index].player;
     return (
       <div className={index % 2 ? 'ListItemOdd' : 'ListItemEven'} style={style}>
-        <p>{player.first_name} {player.last_name} {player.position}</p>
+        <p>{player.first_name} {player.last_name}</p>
       </div>
     )
   };
@@ -21,7 +21,7 @@ class ScrollContainer extends Component {
         className="list"
         height={600}
         itemCount={this.props.rendered.length}
-        itemSize={35}
+        itemSize={70}
         width={800}
       >
         {this.row}

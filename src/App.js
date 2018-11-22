@@ -37,7 +37,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="AppContainer">
         <Header
           sortState={this.state.sortState}
           changeSort={this.changeSort}
