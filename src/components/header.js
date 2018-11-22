@@ -8,18 +8,26 @@ class Header extends Component {
     }
   }
 
-  handleOnClick = () => {
-
-  }
-
   render() {
     return (
       <div className="App-header">
         <h1>Sleeper Test</h1>
         <div className="sortContainer">
-          <ButtonContainer/>
-          <div className="sortBtn" onClick={this.handleOnClick}> A - Z </div>
-          <div className="sortBtn" onClick={this.handleOnClick}> Z - A </div>
+          <ButtonContainer
+            sortState={this.props.sortState}
+            changeSort={this.props.changeSort}
+            sortStyle="All"
+          />
+          <ButtonContainer
+            sortState={this.props.sortState}
+            changeSort={this.props.changeSort}
+            sortStyle="A-Z"
+          />
+          <ButtonContainer
+            sortState={this.props.sortState}
+            changeSort={this.props.changeSort}
+            sortStyle="Z-A"
+          />
         </div>
       </div>
     );

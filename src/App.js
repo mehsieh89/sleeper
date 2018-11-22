@@ -8,17 +8,35 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: data.data,
-      sortState: "all"
+      data: data.data.season_stats,
+      rendered: data.data.season_stats,
+      sortState: "All"
+    }
+  }
+
+  changeSort = (style) => {
+    this.setState({
+      sortState: style
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    let newSortedArray = this.state.data.slice();
+    if(prevState.sortState !== this.state.sortState) {
+      if(this.state.sortState === "A-Z") {
+        newSortedArray.sort((a, b) => (a.player.last_name > b.player.last_name) - (a.player.last_name < b.player.last_name));
+        this.setState({rendered: newSortedArray});
+      } else if(this.state.sortState === "Z-A") {
+        newSortedArray.sort((a, b) => (a.player.last_name < b.player.last_name) - (a.player.last_name > b.player.last_name));
+        this.setState({rendered: newSortedArray});
+      } else if(this.state.sortState === "All") {
+        this.setState({rendered: newSortedArray})
+      }
     }
   }
 
   row = ({ index, style }) => {
-    // console.log(index);
-    // console.log(this.state.data.season_stats[index].player.first_name);
-    // console.log(this.state.data.season_stats[index].player.last_name);
-    // console.log(this.state.data.season_stats[index].player.position);
-    let player = this.state.data.season_stats[index].player;
+    let player = this.state.rendered[index].player;
 
     return (
       <div className={index % 2 ? 'ListItemOdd' : 'ListItemEven'} style={style}>
@@ -32,7 +50,7 @@ class App extends Component {
       <List
         className="list"
         height={600}
-        itemCount={1000}
+        itemCount={this.state.data.length}
         itemSize={35}
         width={800}
       >
@@ -44,7 +62,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header/>
+        <Header
+          sortState={this.state.sortState}
+          changeSort={this.changeSort}
+        />
         <div className="container">
           {this.example()}
         </div>

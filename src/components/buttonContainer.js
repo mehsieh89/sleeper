@@ -3,26 +3,15 @@ import React, { Component } from 'react';
 class ButtonContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isHovering: false,
-    };
-    this.handleMouseHoverE = this.handleMouseHoverE.bind(this);
-    this.handleMouseHoverL = this.handleMouseHoverL.bind(this);
   }
 
-  handleMouseHoverE() {
-    this.setState({ isHovering: true });
-  }
-
-  handleMouseHoverL() {
-    this.setState({ isHovering: false });
+  handleOnClick = () => {
+    this.props.changeSort(this.props.sortStyle);
   }
 
   render() {
-    const isHovering = this.state.isHovering;
-
     let bar = null;
-    if (isHovering) {
+    if (this.props.sortState === this.props.sortStyle) {
       bar = <div id="colorBar" className="animated zoomIn"></div>;
     } else {
       bar = null;
@@ -33,7 +22,7 @@ class ButtonContainer extends Component {
         onMouseEnter={this.handleMouseHoverE}
         onMouseLeave={this.handleMouseHoverL}
       >
-        <div className="sortBtn" onClick={this.handleOnClick}> All </div>
+        <div className="sortBtn" onClick={this.handleOnClick}> {this.props.sortStyle} </div>
         {bar}
       </b>
     );
