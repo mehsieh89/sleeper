@@ -23,7 +23,7 @@ html {
 }
 
 .container {
-  height: 88vh;
+  height: 87.7vh;
   display: flex;
   background-image: url("./footBallField.jpg");
   background-size: cover;
@@ -49,12 +49,37 @@ h1 {
   margin: 0;
 }
 
-.buttonContainer {
+.sortContainer {
   margin-top: 2vh;
   display: flex;
   flex-direction: row;
 }
 
+.sortBox {
+  position: relative;
+  height: 40px;
+}
+
+#colorBar {
+  background-color: #818b91;
+  padding: 4px 0;
+  position: absolute;
+  opacity: 0.6;
+  bottom: 0;
+  width: 100%;
+  border-radius: 25px;
+  animation-duration: .25s;
+}
+
 .sortBtn {
-  
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+  letter-spacing: 1.5px;
+  margin: 0 20px;
+}
+
+.sortBtn:hover {
+  opacity: 0.6;
+  color: #818b91;
 }

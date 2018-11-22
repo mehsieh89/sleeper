@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ButtonContainer from './buttonContainer.js';
 
 class Header extends Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class Header extends Component {
     return (
       <div className="App-header">
         <h1>Sleeper Test</h1>
-        <div className="buttonContainer">
-          <div className="sortBtn" onClick={this.handleOnClick}> All </div>
+        <div className="sortContainer">
+          <ButtonContainer/>
           <div className="sortBtn" onClick={this.handleOnClick}> A - Z </div>
           <div className="sortBtn" onClick={this.handleOnClick}> Z - A </div>
         </div>
